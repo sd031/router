@@ -1,6 +1,6 @@
 /**
  * Router Constructor
- * @params {object} [options] - Router Options
+ * @params {Object} [options] Router Options
  *    @property {String} [defaultRoute] The default route for the router to load
  *    @property {Object} [routes] (optional) An object with a set of routes  
  *    @property {String} [mode] (default: state) The router mode (either url or state) 
@@ -63,7 +63,7 @@ Router = function(options){
 
 	/**
 	 * Template for if no layout is defined
-	 * @return {string}
+	 * @return {String}
 	 */
 	Template['Router'].__helpers[" template"] = function() {
 		return self.getRoute().template;
@@ -71,7 +71,7 @@ Router = function(options){
 
 	/**
 	 * Template of the layout
-	 * @return {string}
+	 * @return {String}
 	 */
 	Template['Router'].__helpers[" layoutTemplate"] = function() {
 		return self.getRoute().layoutTemplate;
@@ -79,7 +79,7 @@ Router = function(options){
 
 	/**
 	 * Templates object which is used if using a layout
-	 * @return {object}
+	 * @return {Object}
 	 */
 	Template['Router'].__helpers[" childTemplates"] = function() {
 		if (self.getRoute().templates) {
@@ -97,9 +97,8 @@ Router.prototype.constructor = Router;
 
 /**
  * Add a new route
- * @param  {string} [name] - Name of the router
- * @param  {object} [options] - Object with templates
- * @return {[type]}
+ * @param  {String} [name] Name of the router
+ * @param  {Object} [options] Object with templates
  */
 Router.prototype.route = function(name, options) {
 	this._routes[name] = options;
@@ -107,7 +106,7 @@ Router.prototype.route = function(name, options) {
 
 /**
  * Get the current route
- * @return {[object]}
+ * @return {Object}
  */
 Router.prototype.getRoute = function() {
 	var route = this._routes[this._currentRoute.get()];
@@ -118,7 +117,7 @@ Router.prototype.getRoute = function() {
 
 /**
  * Get the previous route
- * @return {[object]}
+ * @return {Object}
  */
 Router.prototype.getLastRoute = function() {
 	if (this._history.length > 0) {
@@ -135,8 +134,8 @@ Router.prototype.getLastRoute = function() {
 }
 
 /**
- * Get the array of history
- * @return {[type]}
+ * Get the history array
+ * @return {Array}
  */
 Router.prototype.getHistory = function() {
 	return this._history;
@@ -156,8 +155,9 @@ Router.prototype.back = function() {
 }
 
 /**
- * Go the the specified route
- * @param  {string} [name] - Name of the route
+ * Go to the specified route
+ * @param {String} [name] Name of the route
+ * @param {Boolean} [logHistory] (optional) Whether or not to log this in history
  */
 Router.prototype.go = function(name, logHistory) {
 
