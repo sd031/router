@@ -1,10 +1,13 @@
 # Router
 
-This package is a simple extendable router that works with state based and url routing
+Simple extendable router with state and url based routing and built in history
 
 `meteor add hybrid:router`
 
 TODO: 
-[ ] Finish Documentation
-[ ] Examples
-[ ] URL Routing
+* [x] Templating with Layouts
+* [x] History
+* [x] State Based Routing
+* [ ] URL Routing
+* [ ] Finish Documentation
+* [ ] Examples
