@@ -1,0 +1,7 @@
+<template name="Router">
+	{{#if layoutTemplate}}
+		{{> Layout layoutTemplate=layoutTemplate childTemplates=childTemplates}}
+	{{else}}
+		{{> UI.dynamic template=template}}
+	{{/if}}
+</template>
