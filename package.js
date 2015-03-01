@@ -1,7 +1,7 @@
 Package.describe({
   name: "hybrid:router",
   summary: "Simple extendable router with state and url based routing and built in history",
-  version: "0.0.5",
+  version: "0.0.6",
   git: "https://github.com/meteorhybrid/router"
 });
 
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
     'underscore'
   ])
 
-  api.use('bigdata:logs@1.0.2');
+  api.use('bigdata:logs@1.0.4');
 
   api.addFiles([
     'router.html',

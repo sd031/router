@@ -13,20 +13,27 @@ Router = function(options){
 	defaultOptions = {
 		routes: {},
 		mode: "state",
-		templating: true
+		templating: true,
+		logging: "debug"
 	};
 
 	options = _.extend(defaultOptions, options);
 
+	// Logging
+	if (options.logging == "debug") {
+		Logger.addType("Router", "blue");
+	}
+
+
 	// Options check
 	if (!options) {
-		Logger.log("Router", "No router options provided!");
+		Logger.log("Router", "No router options provided");
 		return false;
 	}
 
 	// Default route check
 	if (!options.defaultRoute) {
-		Logger.log("Router", "No default route provided!");
+		Logger.log("Router", "No default route provided");
 		return false;
 	}
 
@@ -191,7 +198,7 @@ Router.prototype.go = function(name, logHistory) {
 		}
 	}
 	else {
-		Logger.log("Router", "Route does not exist!", name);
+		Logger.log("Router", "Route does not exist", name);
 	}
 }
 
