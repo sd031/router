@@ -10,7 +10,7 @@ Router = function(options){
 
 	var 
 	self = this,
-  defaultOptions = {
+	defaultOptions = {
 		routes: {},
 		mode: "state",
 		templating: true
