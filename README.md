@@ -1,8 +1,16 @@
 # hybrid:router
 
-Simple extensible router with state and url based routing and built in history
+Cross-platofrm, extensible router with state and url based routing and built in history
 
 `meteor add hybrid:router`
+
+Platforms
+* [x] Web
+* [x] iOS
+* [x] Android
+* [x] Mac OS
+* [x] Chrome Extensions
+* [x] Samsung TV
 
 TODO: 
 * [x] Templating with Layouts
@@ -13,3 +21,4 @@ TODO:
 * [ ] URL Routing
 * [ ] Finish Documentation
 * [ ] Examples
+
