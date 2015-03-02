@@ -1,4 +1,4 @@
-# Router
+# hybrid:router
 
 Simple extensible router with state and url based routing and built in history
 
