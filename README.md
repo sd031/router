@@ -1,10 +1,10 @@
-# hybrid:router
+# Hybrid Router
 
-Cross-platofrm, extensible router with state and url based routing and built in history
+Cross-platform, extensible router with state and url based routing and built in history
 
 `meteor add hybrid:router`
 
-Platforms
+Platforms Tested
 * [x] Web
 * [x] iOS
 * [x] Android
@@ -16,7 +16,8 @@ TODO:
 * [x] Templating with Layouts
 * [x] History
 * [x] State Based Routing
-* [x] Simple Auth Checks
+* [x] Auth Checks
+* [x] Not Found Route
 * [ ] Reactive Hooks
 * [ ] URL Routing
 * [ ] Finish Documentation

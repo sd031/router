@@ -1,7 +1,7 @@
 Package.describe({
   name: "hybrid:router",
-  summary: "Simple extendable router with state and url based routing and built in history",
-  version: "0.0.6",
+  summary: "Cross-platform, extensible router with state and url based routing and built in history",
+  version: "0.0.7",
   git: "https://github.com/meteorhybrid/router"
 });
 
