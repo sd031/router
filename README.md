@@ -12,7 +12,7 @@ Platforms Tested
 * [x] Chrome Extensions
 * [x] Samsung TV
 
-TODO: 
+TODO
 * [x] Templating with Layouts
 * [x] History
 * [x] State Based Routing
