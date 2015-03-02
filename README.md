@@ -1,6 +1,6 @@
 # Router
 
-Simple extendable router with state and url based routing and built in history
+Simple extensible router with state and url based routing and built in history
 
 `meteor add hybrid:router`
 
