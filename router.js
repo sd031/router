@@ -38,10 +38,16 @@ Router = function(options){
 	}
 
 	/**
+	 * Default route
+	 * @type {ReactiveVar}
+	 */
+	this._defaultRoute = options.defaultRoute;
+
+	/**
 	 * The reactive current route name
 	 * @type {ReactiveVar}
 	 */
-	this._currentRoute = new ReactiveVar(options.defaultRoute);
+	this._currentRoute = new ReactiveVar(null);
 
 	/**
 	 * Available routes
@@ -60,6 +66,21 @@ Router = function(options){
 	 * @type {Boolean}
 	 */
 	this._templating = options.templating;
+
+	/**
+	 * Template not found route
+	 * @type {String}
+	 */
+	if (options.notFoundRoute)
+		this._notFoundRoute = options.notFoundRoute;
+
+	/**
+	 * Auth route
+	 * @type {String}
+	 */
+	if (options.authRoute)
+		this._authRoute = options.authRoute;
+
 
 	/**
 	 * Template for if no layout is defined
@@ -91,6 +112,10 @@ Router = function(options){
 			};
 		}
 	}
+
+	Meteor.startup(function() {
+		self.go(self._defaultRoute);
+	})
 }
 
 Router.prototype.constructor = Router;
@@ -111,8 +136,13 @@ Router.prototype.route = function(name, options) {
 Router.prototype.getRoute = function() {
 	var route = this._routes[this._currentRoute.get()];
 
-	route.name = this._currentRoute.get();
-	return route;
+	if (route) {
+		route.name = this._currentRoute.get();
+		return route;
+	}
+	else {
+		return false;
+	}
 }
 
 /**
@@ -160,16 +190,39 @@ Router.prototype.back = function() {
  * @param {Boolean} [logHistory] (optional) Whether or not to log this in history
  */
 Router.prototype.go = function(name, logHistory) {
+	var route = this._routes[name];
 
 	if (logHistory !== false) {
 		var logHistory = true;
 	}
 
-	if (this._routes[name]) {
+	if (route) {
 
 		// Check if already on the route
 		if (name == this._currentRoute.get()){
 			return false;
+		}
+
+		// Requires auth check
+		if (route.requiresAuth && !Meteor.userId()) {
+
+			// Check to see if the authRoute exists
+			if (this._authRoute){
+
+				// Check to see authRoute route is registered
+				if (!this._routes[this._authRoute]) {
+					Logger.log("Router", "authRoute not found", this._authRoute);
+					return false;
+				}
+				else {
+					this.go(this._authRoute);
+					return false;
+				}
+			}
+			else {
+				Logger.log("Router", "Used requiresAuth but didn't specify an authRoute");
+				return false;
+			}
 		}
 
 		// Log new route in history
@@ -178,8 +231,8 @@ Router.prototype.go = function(name, logHistory) {
 		}
 		
 		// Before route hook
-		if (this._routes[name].onBeforeRoute && typeof this._routes[name].onBeforeRoute == "function") {
-			this._routes[name].onBeforeRoute();
+		if (route.onBeforeRoute && typeof route.onBeforeRoute == "function") {
+			route.onBeforeRoute();
 		}
 
 		// Change route
@@ -188,17 +241,36 @@ Router.prototype.go = function(name, logHistory) {
 		}
 
 		// On route hook
-		if (this._routes[name].onRoute && typeof this._routes[name].onRoute == "function") {
-			this._routes[name].onRoute();
+		if (route.onRoute && typeof route.onRoute == "function") {
+			route.onRoute();
 		}
 
 		// After route hook
-		if (this._routes[name].onAfterRoute && typeof this._routes[name].onAfterRoute == "function") {
-			this._routes[name].onAfterRoute();
+		if (route.onAfterRoute && typeof route.onAfterRoute == "function") {
+			route.onAfterRoute();
 		}
 	}
 	else {
 		Logger.log("Router", "Route does not exist", name);
+
+		// If there is a notFoundRoute go there instead
+		if (this._notFoundRoute) {
+
+			// Check to see if the notFoundRoute exists
+			if (!this._routes[this._notFoundRoute]) {
+				Logger.log("Router", "notFoundRoute route doesn't exist", this._notFoundRoute);
+				return false;
+			}
+			else {
+				this.go(this._notFoundRoute);
+				return false;
+			}
+		}
+		else { 
+			Logger.log("Router", "No notFoundRoute specified");
+			return false;
+		}
+
 	}
 }
 
