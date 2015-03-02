@@ -178,7 +178,7 @@ Router.prototype.getHistory = function() {
  */
 Router.prototype.back = function() {
 	if (this._history.length > 0) {
-		this.go(this._history[this._history.length - 1], false);
+		this.go(this._history[this._history.length - 1], {}, false);
 		this._history.pop()
 	}
 	else {
@@ -191,8 +191,9 @@ Router.prototype.back = function() {
  * @param {String} [name] Name of the route
  * @param {Boolean} [logHistory] (optional) Whether or not to log this in history
  */
-Router.prototype.go = function(name, logHistory) {
+Router.prototype.go = function(name, data, logHistory) {
 	var route = this._routes[name];
+	route.data  = data;
 
 	if (logHistory !== false) {
 		var logHistory = true;
@@ -234,7 +235,7 @@ Router.prototype.go = function(name, logHistory) {
 		
 		// Before route hook
 		if (route.onBeforeRoute && typeof route.onBeforeRoute == "function") {
-			route.onBeforeRoute();
+			route.onBeforeRoute.call(route);
 		}
 
 		// Change route
@@ -244,12 +245,12 @@ Router.prototype.go = function(name, logHistory) {
 
 		// On route hook
 		if (route.onRoute && typeof route.onRoute == "function") {
-			route.onRoute();
+			route.onRoute.call(route);
 		}
 
 		// After route hook
 		if (route.onAfterRoute && typeof route.onAfterRoute == "function") {
-			route.onAfterRoute();
+			route.onAfterRoute.call(route);
 		}
 	}
 	else {
