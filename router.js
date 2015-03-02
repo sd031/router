@@ -9,17 +9,13 @@
  *    @property {String} [authRoute] (optional) Route to go to if a route has the requiresAuth flag
  */
 Router = function(options){
-
-	var 
-	self = this,
-	defaultOptions = {
+	var self = this;
+	options = _.extend({
 		routes: {},
 		mode: "state",
 		templating: true,
 		logging: "debug"
-	};
-
-	options = _.extend(defaultOptions, options);
+	}, options);
 
 	// Logging
 	if (options.logging == "debug") {
@@ -193,7 +189,9 @@ Router.prototype.back = function() {
  */
 Router.prototype.go = function(name, data, logHistory) {
 	var route = this._routes[name];
-	route.data  = data;
+
+	if (data)
+		route.data  = data;
 
 	if (logHistory !== false) {
 		var logHistory = true;
