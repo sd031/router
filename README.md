@@ -9,7 +9,7 @@ TODO:
 * [x] History
 * [x] State Based Routing
 * [x] Simple Auth Checks
-* [ ] Reactive onBeforeRoute, onRoute, onAfterRoute
+* [ ] Reactive Hooks
 * [ ] URL Routing
 * [ ] Finish Documentation
 * [ ] Examples
