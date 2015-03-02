@@ -5,6 +5,8 @@
  *    @property {Object} [routes] (optional) An object with a set of routes  
  *    @property {String} [mode] (default: state) The router mode (either url or state) 
  *    @property {Boolean} [templating] (default: true) Whether to use router layout/template features or not
+ *    @property {String} [notFoundRoute] (optional) Route to go to if the supplied route is not found
+ *    @property {String} [authRoute] (optional) Route to go to if a route has the requiresAuth flag
  */
 Router = function(options){
 
