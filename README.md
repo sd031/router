@@ -20,6 +20,7 @@ TODO
 * [x] Not Found Route
 * [ ] Reactive Hooks
 * [ ] URL Routing
+* [ ] Simple Plugin System
 * [ ] Finish Documentation
 * [ ] Examples
 
