@@ -8,7 +8,7 @@ Platforms Tested
 * [x] Web
 * [x] iOS
 * [x] Android
-* [x] Mac OS
+* [x] Mac OS X
 * [x] Chrome Extensions
 * [x] Samsung TV
 
